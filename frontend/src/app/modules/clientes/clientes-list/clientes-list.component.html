@@ -1,0 +1,117 @@
+<div class="pt-3 pb-2 mb-3 border-bottom">
+  <div class="row">
+    <div class="col-6">
+      <h1 class="h2">Listagem</h1>
+    </div>
+    <div class="col-6 text-end">
+      <a [routerLink]="['/cadastrar']" type="button" class="btn btn-primary">
+        Cadastrar
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <h5 class="card-header">Pesquisa</h5>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-lg-4 col-md-4 col-sm-12">
+          <div class="form-group">
+          <label>Nome</label>
+          <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"
+            placeholder="Digite o NOME para pesquisar" [(ngModel)]="filtroListaNome">
+        </div>
+      </div>
+    
+      <div class="col-lg-4 col-md-4 col-sm-12">
+          <div class="form-group">
+          <label>E-mail</label>
+          <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"
+            placeholder="Digite o EMAIL para pesquisar" [(ngModel)]="filtroListaEmail">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+
+<table class="table">
+  <thead class="text-primary">
+    <th>
+      Nome
+    </th>
+    <th>
+      E-mail
+    </th>
+    <th>
+      Nascimento
+    </th>
+    <th class="text-center">
+      Ações
+    </th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let cliente of clientesFiltrados">
+      <td>
+        {{cliente?.nome}}
+      </td>
+      <td>
+        {{cliente?.email}}
+      </td>
+      <td>
+        {{cliente?.nascimento}}
+      </td>
+      <td class="text-center">
+        <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+          <a [routerLink]="['/editar/', cliente?.id]" type="button" class="btn btn-warning btn-sm">
+            Editar
+          </a>
+          <button (click)="openModalExcluir(content, cliente)" type="button"
+            class="btn btn-sm btn-danger">
+            Excluir
+          </button>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="row">
+  <div class="col-6">
+    <button type="button" (click)="backPage()"
+     [ngClass]="{'disabled': numPagina == 0}" class="btn btn-outline-primary">
+      Anterior
+    </button>
+  </div>
+
+  <div class="col-6 text-end">
+    <button type="button" (click)="nextPage()"
+     [ngClass]="{'disabled': clientes?.length == 0}" class="btn btn-outline-primary">
+      Próxima
+    </button>
+  </div>
+</div>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-title">Exclusão de cliente</h4>
+  </div>
+  <div class="modal-body">
+    <p>
+      <strong>
+        Tem certeza de que deseja excluir o cliente
+        <span class="text-danger">{{cliente?.nome}}</span>?
+      </strong>
+    </p>
+    <p>
+      Todas as informações associadas a este cliente serão excluídas permanentemente.
+      <span class="text-danger">Esta operação não pode ser desfeita.</span>
+    </p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-info" (click)="modal.dismiss('cancelar')">Cancelar</button>
+    <button type="button" class="btn btn-danger" (click)="modal.close('sim')">Sim</button>
+  </div>
+</ng-template>
+
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>

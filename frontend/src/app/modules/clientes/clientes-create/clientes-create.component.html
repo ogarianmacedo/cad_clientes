@@ -1,0 +1,119 @@
+<div class="pt-3 pb-2 mb-3 border-bottom">
+  <div class="row">
+    <div class="col-6">
+      <h1 class="h2">Cadastrar</h1>
+    </div>
+    <div class="col-6 text-end">
+      <a [routerLink]="['/']" type="button" class="btn btn-primary">
+        Listagem
+      </a>
+    </div>
+  </div>
+</div>
+
+<form [formGroup]="formularioCliente" (ngSubmit)="cadastrar()">
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <div class="form-group">
+        <label>Nome</label>
+        <input formControlName="nome" type="text" class="form-control" pattern="[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$"
+          [ngClass]="{'is-invalid': formularioCliente.get('nome').errors && formularioCliente.get('nome').touched}" 
+          placeholder="Digite o nome do usuário">
+        <div *ngIf="formularioCliente.get('nome').hasError('required') && formularioCliente.get('nome').touched" class="invalid-feedback">
+          Campo obrigatório!
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 mb-3">
+      <div class="form-group">
+        <label>E-mail</label>
+        <input formControlName="email" type="email" class="form-control"
+          [ngClass]="{'is-invalid': formularioCliente.get('email').errors && formularioCliente.get('email').touched}"
+          placeholder="Digite o e-mail do usuário">
+        <div *ngIf="formularioCliente.get('email').hasError('required') && formularioCliente.get('email').touched" class="invalid-feedback">
+          Campo obrigatório!
+        </div>
+        <div *ngIf="formularioCliente.get('email').hasError('email') && formularioCliente.get('email').touched" class="invalid-feedback">
+          Email inválido!
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <div class="form-group">
+        <label>Nascimento</label>
+        <input formControlName="nascimento" type="text" class="form-control" 
+          [dropSpecialCharacters]="false"
+          mask="00/00/0000"
+          [ngClass]="{'is-invalid': formularioCliente.get('nascimento').errors && formularioCliente.get('nascimento').touched}"
+          placeholder="Digite a data de nascimento do usuário">
+        <div *ngIf="formularioCliente.get('nascimento').hasError('required') && formularioCliente.get('nascimento').touched" class="invalid-feedback">
+          Campo obrigatório!
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 mb-3">
+      <div class="form-group">
+        <label>CPF</label>
+        <input formControlName="cpf" type="text" class="form-control" mask="000.000.000-00"
+          [ngClass]="{'is-invalid': formularioCliente.get('cpf').errors && formularioCliente.get('cpf').touched}"
+          placeholder="Digite o CPF do usuário">
+        <div *ngIf="formularioCliente.get('cpf').hasError('required') && formularioCliente.get('cpf').touched" class="invalid-feedback">
+          Campo obrigatório!
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <div class="form-group">
+        <label>Celular</label>
+        <input formControlName="celular" type="text" class="form-control"
+          mask="(00) 00000-0000"
+          [ngClass]="{'is-invalid': formularioCliente.get('celular').errors && formularioCliente.get('celular').touched}"
+          placeholder="Digite o número do celular">
+        <div *ngIf="formularioCliente.get('celular').hasError('required') && formularioCliente.get('celular').touched" class="invalid-feedback">
+          Campo obrigatório!
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 mb-3">
+      <div class="form-group">
+        <label>Endereço</label>
+        <input formControlName="endereco" type="text" class="form-control" 
+          [ngClass]="{'is-invalid': formularioCliente.get('endereco').errors && formularioCliente.get('endereco').touched}"
+          placeholder="Digite o endereco">
+        <div *ngIf="formularioCliente.get('endereco').hasError('required') && formularioCliente.get('endereco').touched" class="invalid-feedback">
+          Campo obrigatório!
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <div class="form-group">
+        <label>Observação</label>
+        <input formControlName="observacao" type="text" class="form-control" maxlength="300"
+          [ngClass]="{'is-invalid': formularioCliente.get('observacao').errors && formularioCliente.get('observacao').touched}"
+          placeholder="Observação">
+        <div *ngIf="formularioCliente.get('observacao').hasError('required') && formularioCliente.get('observacao').touched" class="invalid-feedback">
+          Campo obrigatório!
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <br>
+  <div class="row">
+    <div class="update ml-auto mr-auto">
+      <button [disabled]="formularioCliente.invalid" type="submit"
+        class="btn btn-primary btn-round">Salvar</button>
+    </div>
+  </div>
+</form>
+
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
