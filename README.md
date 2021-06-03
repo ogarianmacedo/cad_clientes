@@ -1,6 +1,6 @@
 # cad_clientes
 
-Projeto Livre - Crud cadastro de clientes com Angular 11, Laravel 7 e com PDO para comunicação com o Banco de Dados
+Projeto Livre - Crud de clientes com Angular 11, Laravel 7 e com PDO para comunicação com o Banco de Dados
 
 #### BACKEND:
     1- Acessar pasta: cd backend
