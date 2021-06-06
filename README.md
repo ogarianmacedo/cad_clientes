@@ -15,3 +15,4 @@ Projeto Livre - Crud de clientes com Angular 11, Laravel 7 e com PDO para comuni
     3- Executar: ng serve
     4- Acessar Frontend: localhost:4200
 
+*cad_clientes.sql para criação das tabelas*
